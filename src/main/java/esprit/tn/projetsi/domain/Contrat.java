@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "contrat")
@@ -29,4 +31,12 @@ public class Contrat {
 
     @Column(nullable = false)
     private boolean valide;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_reservation", unique = true)
+    private Reservation reservation;
+
+    // cascade = ALL : supprimer un contrat supprime ses paiements
+    @OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL)
+    private List<Paiement> paiements = new ArrayList<>();
 }
