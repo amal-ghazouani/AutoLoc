@@ -1,3 +1,4 @@
+
 package esprit.tn.projetsi.services;
 
 import esprit.tn.projetsi.domain.Employe;
@@ -20,4 +21,12 @@ public interface IEmploye {
 
     // DELETE
     void removeEmploye(Long idEmploye);
+
+    // AFFECTATION ET DESAFFECTATION
+
+    // Désaffecter un employé de son agence actuelle
+    Employe desaffecterEmploye(Long idEmploye);
+
+    // Affecter un employé à une nouvelle agence
+    Employe affecterEmploye(Long idEmploye, Long idAgence);
 }

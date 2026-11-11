@@ -1,5 +1,6 @@
 package esprit.tn.projetsi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,8 +36,9 @@ public class Agence {
 
     // Pas de cascade : supprimer une agence ne supprime pas ses véhicules
     @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
+   @JsonIgnore
     private List<Vehicule> vehicules = new ArrayList<>();
 
     @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
-    private List<Employe> employes = new ArrayList<>();
+    @JsonIgnore  private List<Employe> employes = new ArrayList<>();
 }

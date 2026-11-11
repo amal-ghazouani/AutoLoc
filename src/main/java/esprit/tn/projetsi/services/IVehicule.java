@@ -1,3 +1,4 @@
+
 package esprit.tn.projetsi.services;
 
 import esprit.tn.projetsi.domain.Vehicule;
@@ -20,4 +21,18 @@ public interface IVehicule {
 
     // DELETE
     void removeVehicule(Long idVehicule);
+
+    // AFFECTATION ET DESAFFECTATION
+
+    // Affecter un véhicule à une agence
+    Vehicule affecterVehicule(Long idVehicule, Long idAgence);
+
+    // Désaffecter un véhicule de son agence
+    void desaffecterVehicule(Long idVehicule);
+
+    // Affecter un équipement à un véhicule
+    Vehicule affecterEquipement(Long idVehicule, Long idEquipement);
+
+    // Désaffecter un équipement d'un véhicule
+    Vehicule desaffecterEquipement(Long idVehicule, Long idEquipement);
 }

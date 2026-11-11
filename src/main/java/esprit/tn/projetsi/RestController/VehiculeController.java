@@ -1,3 +1,4 @@
+
 package esprit.tn.projetsi.RestController;
 
 import esprit.tn.projetsi.domain.Vehicule;
@@ -19,16 +20,28 @@ public class VehiculeController {
 
     IVehicule iVehicule;
 
+    // CREATE
     @PostMapping("/AddVehicule")
     public Vehicule addVehicule(@Valid @RequestBody Vehicule vehicule) {
         return iVehicule.addVehicule(vehicule);
     }
+    // 2. DESAFFECTER UN VEHICULE DE SON AGENCE
+    @PutMapping("/desaffecterVehicule/{idVehicule}")
+    public ResponseEntity<Void> desaffecterVehicule(
+            @PathVariable Long idVehicule) {
 
+        iVehicule.desaffecterVehicule(idVehicule);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    // READ ALL
     @GetMapping("/GetAll")
     public List<Vehicule> getAll() {
         return iVehicule.retrieveAllVehicules();
     }
 
+    // READ BY ID
     @GetMapping("/GetVehicule/{id}")
     public ResponseEntity<Vehicule> getVehicule(@PathVariable Long id) {
         return iVehicule.retrieveVehicule(id)
@@ -36,13 +49,42 @@ public class VehiculeController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // UPDATE
     @PutMapping("/updateVehicule")
     public Vehicule updateVehicule(@RequestBody Vehicule vehicule) {
         return iVehicule.updateVehicule(vehicule);
     }
 
+    // DELETE
     @DeleteMapping("/deleteVehicule/{id}")
     public void deleteVehicule(@PathVariable Long id) {
         iVehicule.removeVehicule(id);
+    }
+
+    // 1. AFFECTER UN VEHICULE A UNE AGENCE
+    @PutMapping("/affecterVehicule/{idVehicule}/{idAgence}")
+    public Vehicule affecterVehicule(
+            @PathVariable Long idVehicule,
+            @PathVariable Long idAgence) {
+
+        return iVehicule.affecterVehicule(idVehicule, idAgence);
+    }
+
+    // 2. AFFECTER UN EQUIPEMENT A UN VEHICULE
+    @PutMapping("/affecterEquipement/{idVehicule}/{idEquipement}")
+    public Vehicule affecterEquipement(
+            @PathVariable Long idVehicule,
+            @PathVariable Long idEquipement) {
+
+        return iVehicule.affecterEquipement(idVehicule, idEquipement);
+    }
+
+    // 3. DESAFFECTER UN EQUIPEMENT D'UN VEHICULE
+    @PutMapping("/desaffecterEquipement/{idVehicule}/{idEquipement}")
+    public Vehicule desaffecterEquipement(
+            @PathVariable Long idVehicule,
+            @PathVariable Long idEquipement) {
+
+        return iVehicule.desaffecterEquipement(idVehicule, idEquipement);
     }
 }
