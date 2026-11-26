@@ -1,3 +1,4 @@
+
 package esprit.tn.projetsi.domain;
 
 import jakarta.persistence.*;
@@ -22,19 +23,19 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idClient;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String nom;
 
     @Column(nullable = false, length = 50)
     private String prenom;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = true, unique = true, length = 100)
     private String email;
 
     @Column(length = 20)
     private String telephone;
 
-    @Column(nullable = false, unique = true, length = 30)
+    @Column( length = 30)
     private String numPermis;
 
     @Column(nullable = false)
@@ -42,4 +43,11 @@ public class Client {
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
     private List<Reservation> reservations = new ArrayList<>();
+
+    @PrePersist
+    public void prePersist() {
+        if (dateInscription == null) {
+            dateInscription = LocalDate.now();
+        }
+    }
 }

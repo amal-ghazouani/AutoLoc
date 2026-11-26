@@ -1,6 +1,8 @@
 package esprit.tn.projetsi.services;
 
 import esprit.tn.projetsi.domain.Client;
+import esprit.tn.projetsi.dto.ClientRequestDto;
+import esprit.tn.projetsi.dto.ClientResponseDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,5 +22,10 @@ public interface IClient {
 
     // DELETE
     void removeClient(Long idClient);
-}
 
+
+    ClientResponseDto addClientDto(ClientRequestDto dto);
+
+
+    Optional<ClientResponseDto> retrieveClientDto(Long idClient);
+}
